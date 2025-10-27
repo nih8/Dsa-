@@ -46,8 +46,9 @@ string norm(string &curr){
 }
 
 int main(){
-    unordered_map<string,vector<int>>m[4]; //array of 4 maps for the words with key as the word and value as the vector which contains the positions of the word
-    for(int j=0;j<4;j++){
+    unordered_map<string,unordered_map<string,vector<int>>>global_index;//map of maps(this is the kinda stuff actually used in search engines)
+    //unordered_map<string,vector<int>>m[4]; //array of 4 maps for the words with key as the word and value as the vector which contains the positions of the word
+    for(int j=3;j>=0;j--){
     string filename = "sample" + to_string(j+1) + ".txt";
     ifstream file(filename);
     if(!file)cout<<"file no open :(";
@@ -57,14 +58,23 @@ int main(){
           stringstream s(currline); //stringstream breaks data by spaces making it ez to read
           while(s>>currword){ //reads words separated by spaces, tabs, newlines one at a time from the stringstream
                 currword = norm(currword);
-                if(currword.size()!=0){i++;
-                 if(non_imp_words.count(currword)==0){
-                    m[j][currword].push_back(i);
-                    
-                }}
+                if(currword.size()!=0){
+                 global_index[currword][filename].push_back(i);
+                 i++;
+                }
           }
     }
+
 }
+    /*unordered_map<string,unordered_map<string,vector<int>>>global_index;
+    for(int i=3;i>=0;i--){
+        string filename = "sample" + to_string(i+1) + ".txt";
+        for(auto word:m[i]){
+            vector<int>curr_file_locs = word.second;
+            string curr_word = word.first;
+            global_index[curr_word][filename]=curr_file_locs;
+        }
+    }*/
     
     /*for(auto curr:m){
         cout<<curr.first<<" ";
@@ -76,8 +86,14 @@ int main(){
    cout<<"enter word"<<endl;
    string lol;
    cin>>lol;
-   for(int i=0;i<4;i++){
+   /*for(int i=0;i<4;i++){
      cout<<"sample" + to_string(i+1) + ".txt:"<<" "<<m[i][lol].size()<<" matches"<<endl;
+   }*/
+   if(global_index.find(lol)==global_index.end())cout<<"0 Matches Found"<<endl;
+   for(auto inside_map : global_index[lol]){
+    cout<<inside_map.first<<":"<<" ";
+    vector<int>curr_locs = inside_map.second;
+    cout<<curr_locs.size()<<" matches\n";
    }
 
 }
