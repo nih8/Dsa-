@@ -45,9 +45,85 @@ string norm(string &curr){
         
 }
 
+bool binary_search(vector<int>v, int pos){
+    int left = 0;
+    int right = v.size() -1;
+    while(left<=right){
+        int mid = (left+right)/2;
+        if(v[mid]==pos)return true;
+        else if(v[mid]<pos){
+            left = mid+1;
+        }
+        else{
+            right = mid -1;
+        }
+    }
+    return false;
+}
+void word_search(unordered_map<string,unordered_map<string,vector<int>>>global_index,string word){
+    if(global_index.find(word)==global_index.end()){
+        cout<<"0 Matches Found"<<endl;
+    }
+    for(auto inside_map : global_index[word]){
+    cout<<inside_map.first<<":"<<" ";
+    vector<int>curr_locs = inside_map.second;
+    cout<<curr_locs.size()<<" matches\n";
+   }
+}
+int lol(unordered_map<string,unordered_map<string,vector<int>>>global_index,string phrase,string file){
+    stringstream phrase_s(phrase); //converting phrase into a stringstream
+    string word;int count=0;
+    vector<string>p_w;
+    while(phrase_s >>word){
+        p_w.push_back(word);       //pushing separated words into a vector 
+    }
+    for(int pos : global_index[p_w[0]][file]){ //iterating through the positions of the first word in phrase
+        int current = pos;
+        bool match = true;
+        for(int i=1;i<p_w.size();i++){
+            vector<int>next_pos = global_index[p_w[i]][file];  //checking that for a current position of the word are their positions of the next words
+            if(!binary_search(next_pos,current+1)){
+                match = false;                         //if any position doesnt exist,break the loop and move on to the next position go the first word
+                break;
+            }
+            current++;
+        }
+        if(match){
+            count++;
+        }
+    }
+    return count;
+}
+
+void phrase_search(unordered_map<string,unordered_map<string,vector<int>>>global_index,string phrase){
+        
+        string word;
+        bool total=false;
+        for(int i=0;i<4;i++){
+            stringstream phrase_s(phrase);
+            string filename = "sample" + to_string(i+1) + ".txt";
+            bool flag = true;
+            while(phrase_s >> word){
+                if(global_index[word][filename].size()==0){
+                flag = false;
+                break;
+                }
+            }
+            if(flag){
+            cout<<filename<<" "<<lol(global_index,phrase,filename)<<endl;
+            total = true;
+            }
+        }
+        if(!total){
+            cout<<"No matches found\n";
+        }
+        
+
+}
+
 int main(){
     unordered_map<string,unordered_map<string,vector<int>>>global_index;//map of maps(this is the kinda stuff actually used in search engines)
-    //unordered_map<string,vector<int>>m[4]; //array of 4 maps for the words with key as the word and value as the vector which contains the positions of the word
+    
     for(int j=3;j>=0;j--){
     string filename = "sample" + to_string(j+1) + ".txt";
     ifstream file(filename);
@@ -66,34 +142,7 @@ int main(){
     }
 
 }
-    /*unordered_map<string,unordered_map<string,vector<int>>>global_index;
-    for(int i=3;i>=0;i--){
-        string filename = "sample" + to_string(i+1) + ".txt";
-        for(auto word:m[i]){
-            vector<int>curr_file_locs = word.second;
-            string curr_word = word.first;
-            global_index[curr_word][filename]=curr_file_locs;
-        }
-    }*/
+phrase_search(global_index,"soothing presence");
     
-    /*for(auto curr:m){
-        cout<<curr.first<<" ";
-        for(int i:curr.second){
-            cout<<i<<" ";
-        }
-        cout<<endl;
-    }*/
-   cout<<"enter word"<<endl;
-   string lol;
-   cin>>lol;
-   /*for(int i=0;i<4;i++){
-     cout<<"sample" + to_string(i+1) + ".txt:"<<" "<<m[i][lol].size()<<" matches"<<endl;
-   }*/
-   if(global_index.find(lol)==global_index.end())cout<<"0 Matches Found"<<endl;
-   for(auto inside_map : global_index[lol]){
-    cout<<inside_map.first<<":"<<" ";
-    vector<int>curr_locs = inside_map.second;
-    cout<<curr_locs.size()<<" matches\n";
-   }
-
+   
 }
