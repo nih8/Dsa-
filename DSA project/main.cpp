@@ -114,11 +114,9 @@ void phrase_search(unordered_map<string,unordered_map<string,vector<int>>>global
             total = true;
             }
         }
-        if(!total){
+        if(!total){           //output if no matches found in all files
             cout<<"No matches found\n";
         }
-        
-
 }
 
 int main(){
@@ -140,9 +138,5 @@ int main(){
                 }
           }
     }
-
-}
-phrase_search(global_index,"soothing presence");
-    
-   
+}   
 }
