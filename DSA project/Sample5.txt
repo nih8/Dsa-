@@ -1,0 +1,2 @@
+This is the sample text file to check what if we can detect the auto search or not .
+Apart from cats , this sample file is to let us know we can detect any text based on the text file
