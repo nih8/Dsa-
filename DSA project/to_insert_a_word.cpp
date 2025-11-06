@@ -60,5 +60,27 @@ public:
         curr->cntt++;
     }
 
+    void splitninsert(string words){
+        string word="";
+        int n=words.length()
+        for(int i=0;i<n;i++){
+            char ch=words[i];
+
+            if(isletter(tolower(ch))){
+                word+=tolower(ch);
+            }
+            else{
+                if(word!=""){
+                    insert(word); 
+                    word="";  
+                }
+            }
+        }
+
+        if(word!=""){
+            insert(word);
+        }
+    }
+
 
 
