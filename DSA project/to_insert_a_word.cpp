@@ -9,7 +9,7 @@
 
 using namespace std;
 struct TrieNode{
-    TrieeNode* next[26]; 
+    TrieNode* next[26]; 
     bool isend; 
     int cnt; 
 
@@ -38,7 +38,7 @@ public:
     }
 
     bool isletter(char ch){
-        return(c>='a' && c<='z');
+        return(ch>='a' && ch<='z');
     }
 
     void insert(string word){
@@ -57,12 +57,12 @@ public:
         }
       
         curr->isend= true;
-        curr->cntt++;
+        curr->cnt++;
     }
 
     void splitninsert(string words){
         string word="";
-        int n=words.length()
+        int n=words.length();
         for(int i=0;i<n;i++){
             char ch=words[i];
 
@@ -87,7 +87,7 @@ public:
         return;
 
         if(node->isend){
-            cout<<prefix<<"count: "<<node->cnt<<endl;
+            cout<<st<<"=>count: "<<node->cnt<<endl;
         }
 
         for(int i=0;i<26;i++){
