@@ -82,5 +82,27 @@ public:
         }
     }
 
+    void display(TrieNode* node,string st){
+        if(node==NULL) 
+        return;
+
+        if(node->isend){
+            cout<<prefix<<"count: "<<node->cnt<<endl;
+        }
+
+        for(int i=0;i<26;i++){
+            if(node->next[i]!=NULL){
+                char ch='a'+i;
+                display(node->next[i],st+ch);
+            }
+        }
+    }
+
+    void show(){
+        cout<<"\nWords stored in Trie:\n";
+        display(root,"");
+    }
+};
+
 
 
