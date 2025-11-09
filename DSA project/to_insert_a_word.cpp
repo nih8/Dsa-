@@ -6,9 +6,10 @@
 #include <fstream>
 #include <ctype.h>
 #include <sstream>
-
 using namespace std;
+
 struct TrieNode{
+    // created for the alphabets as all words will have 26 paths to go
     TrieNode* next[26]; 
     bool isend; 
     int cnt; 
@@ -30,13 +31,15 @@ public:
         root=new TrieNode();
     }
 
+    //this code to convert the uppercase to lowercase
     char tolower(char ch){
         if(ch>='A' && ch<='Z'){
-            ch-='A'+'a';
+            ch=ch-'A'+'a';
         }
         return ch;
     }
 
+    //to check if we are having alphabets or not
     bool isletter(char ch){
         return(ch>='a' && ch<='z');
     }
@@ -44,14 +47,17 @@ public:
     void insert(string word){
         TrieNode* curr=root;
         int n=word.size();
+        //to get each alphabet in the word
         for(int i=0;i<n;i++) {
             char c=tolower(word[i]);
+            // to ignore any other things except the alphabets
             if(!isletter(c)){
                 continue;
             }
             int ind=c-'a';
             if(curr->next[ind]==NULL){
                 curr->next[ind]=new TrieNode();
+                // if we cannot find the word then we will create a new node
             }
             curr=curr->next[ind];
         }
