@@ -2,6 +2,7 @@
 #include<fstream>
 #include<sstream>
 #include<ctype.h>
+#include "to_insert_a_word.cpp"
 using namespace std;
 //this is a list of articles,prepositions,conjunctions,pronouns which nlms mostly ignore
 unordered_set<string>non_imp_words={"a", "an", "the", "and", "or", "but", "if", 
@@ -121,7 +122,8 @@ void phrase_search(unordered_map<string,unordered_map<string,vector<int>>>global
 
 int main(){
     unordered_map<string,unordered_map<string,vector<int>>>global_index;//map of maps(this is the kinda stuff actually used in search engines)
-    
+
+    Trie trie;
     for(int j=3;j>=0;j--){
     string filename = "sample" + to_string(j+1) + ".txt";
     ifstream file(filename);
@@ -133,10 +135,10 @@ int main(){
           while(s>>currword){ //reads words separated by spaces, tabs, newlines one at a time from the stringstream
                 currword = norm(currword);
                 if(currword.size()!=0){
-                 global_index[currword][filename].push_back(i);
+                    global_index[currword][filename].push_back(i);
+                    trie.insert(currword);
                  i++;
                 }
           }
     }
-}   
 }
