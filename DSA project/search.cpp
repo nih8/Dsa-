@@ -74,3 +74,22 @@ public:
                 suggestions(node->next[i], prefix + char('a' + i));
         }
     }
+
+    // Autocomplete main
+
+    void autocomplete(string prefix) {
+        TrieNode* curr = root;
+        for (char c : prefix) {
+            c = tolower(c);
+            if (!isletter(c)) continue;
+            int idx = c - 'a';
+            if (!curr->next[idx]) {
+                cout << "No suggestions found for \"" << prefix << "\"\n"; // if no matching list is found by the end of the new word entered
+                return;
+            }
+            curr = curr->next[idx];
+        }
+        cout << "Autocomplete suggestions for \"" << prefix << "\":\n";
+        suggestions(curr, prefix); // calls the suggestions functions, and will recursively fill all words starting from those letters
+    }
+};
