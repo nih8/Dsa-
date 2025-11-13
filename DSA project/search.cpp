@@ -62,3 +62,15 @@ public:
         }
         return curr->isEnd; // all letters of the word are checked
     }
+
+    // Autocomplete helper
+
+    void suggestions(TrieNode* node, string prefix) {
+        if (!node) return;
+        if (node->isEnd)
+            cout << prefix << " (" << node->cnt << ")\n";
+        for (int i = 0; i < 26; i++) {
+            if (node->next[i])
+                suggestions(node->next[i], prefix + char('a' + i));
+        }
+    }
