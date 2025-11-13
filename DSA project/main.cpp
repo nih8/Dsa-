@@ -50,18 +50,18 @@ void word_search(unordered_map<string, unordered_map<string, vector<int>>> &glob
     }
 
     vector<pair<string, int>> results;
-    for(auto &inside_map : global_index[word]) {
-        results.push_back({inside_map.first, (int)inside_map.second.size()});
+    for(auto &inside_map:global_index[word]) {
+        results.push_back({inside_map.first,(int)inside_map.second.size()});
     }
 
     // 🔥 sort by frequency (descending)
-    sort(results.begin(), results.end(), [](auto &a, auto &b){
+    sort(results.begin(),results.end(),[](auto &a,auto &b){
         return a.second > b.second;
     });
 
     cout << "Found in (sorted by frequency):\n";
-    for(auto &r : results) {
-        cout << r.first << " (" << r.second << ")\n";
+    for(auto &r:results) {
+        cout<<r.first<<" ("<<r.second<<")\n";
     }
 }
 
@@ -156,22 +156,26 @@ int main() {
     }
 
     while(true) {
-        cout << "\n1. Search Word\n2. Search Phrase\n3. Exit\nChoice: ";
+        cout << "\n1. Search Word\n2. Search Phrase\n3. Autocompete\n4. Exit\nChoice: ";
         int ch; cin >> ch; cin.ignore();
-        if(ch == 3) break;
+        if(ch==3) break;
 
-        if(ch == 1) {
+        if(ch==1) {
             string word;
-            cout << "Enter word: ";
+            cout<<"Enter word: ";
             getline(cin, word);
             word = norm(word);
             word_search(global_index, word);
         }
-        else if(ch == 2) {
+        else if(ch==2) {
             string phrase;
-            cout << "Enter phrase: ";
+            cout<<"Enter phrase: ";
             getline(cin, phrase);
             phrase_search(global_index, phrase);
+        }
+        else if(ch==3){
+            string word;
+            cout<<"Enter Word For Autocomplete:";
         }
     }
 
