@@ -2,6 +2,7 @@
 #include<fstream>
 #include<sstream>
 #include<ctype.h>
+#include "to_insert_a_word.cpp"
 using namespace std;
 
 // stopwords list
@@ -130,6 +131,7 @@ void phrase_search(unordered_map<string,unordered_map<string,vector<int>>> &glob
 int main() {
     unordered_map<string, unordered_map<string, vector<int>>> global_index;
 
+    Trie trie;
     for(int j=3; j>=0; j--) {
         string filename = "sample" + to_string(j+1) + ".txt";
         ifstream file(filename);
@@ -144,8 +146,9 @@ int main() {
             stringstream s(currline);
             while(s >> currword) {
                 currword = norm(currword);
-                if(currword.empty() || non_imp_words.count(currword)) continue;
-                global_index[currword][filename].push_back(i);
+                if(currword.size()!=0){
+                    global_index[currword][filename].push_back(i);
+                    trie.insert(currword);
                 i++;
             }
         }
