@@ -66,16 +66,20 @@ public:
         curr->cnt++;
     }
 
+    //this part is to split the words
     void splitninsert(string words){
         string word="";
+        //reading the whole word
         int n=words.length();
         for(int i=0;i<n;i++){
             char ch=words[i];
 
+            //checking if the word is lower or not
             if(isletter(tolower(ch))){
                 word+=tolower(ch);
             }
             else{
+                //if the word is not there and there are other things like number or symobol then the word is ended
                 if(word!=""){
                     insert(word); 
                     word="";  
@@ -83,11 +87,13 @@ public:
             }
         }
 
+        //if any words left then insert it
         if(word!=""){
             insert(word);
         }
     }
 
+    //to display the words
     void display(TrieNode* node,string st){
         if(node==NULL) 
         return;
@@ -104,6 +110,7 @@ public:
         }
     }
 
+    //to show the words that are stored
     void show(){
         cout<<"\nWords stored in Trie:\n";
         display(root,"");
