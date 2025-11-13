@@ -149,7 +149,8 @@ int main() {
                 if(currword.size()!=0){
                     global_index[currword][filename].push_back(i);
                     trie.insert(currword);
-                i++;
+                    i++;
+                }
             }
         }
     }
