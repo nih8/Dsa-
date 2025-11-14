@@ -55,7 +55,7 @@ void word_search(unordered_map<string, unordered_map<string, vector<int>>> &glob
         results.push_back({inside_map.first,(int)inside_map.second.size()});
     }
 
-    // 🔥 sort by frequency (descending)
+    //sort by frequency (descending)
     sort(results.begin(),results.end(),[](auto &a,auto &b){
         return a.second > b.second;
     });
