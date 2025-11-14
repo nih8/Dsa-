@@ -2,7 +2,8 @@
 #include<fstream>
 #include<sstream>
 #include<ctype.h>
-#include "to_insert_a_word.cpp"
+#include "search.cpp"
+
 using namespace std;
 
 // stopwords list
@@ -158,7 +159,7 @@ int main() {
     while(true) {
         cout << "\n1. Search Word\n2. Search Phrase\n3. Autocompete\n4. Exit\nChoice: ";
         int ch; cin >> ch; cin.ignore();
-        if(ch==3) break;
+        if(ch==4) break;
 
         if(ch==1) {
             string word;
@@ -176,6 +177,9 @@ int main() {
         else if(ch==3){
             string word;
             cout<<"Enter Word For Autocomplete:";
+            cin>>word;
+            trie.autocomplete(word);
+
         }
     }
 
