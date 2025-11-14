@@ -1,9 +1,9 @@
-🧭 Mini Search Engine (C++)
+# 🧭 Mini Search Engine (C++)
 
 This project implements a mini text-search engine using core C++ data structures.
 It supports Word Search, Phrase Search, and Autocomplete across multiple .txt files.
 
-🔹 Features
+## Features
 
 Indexes all words from multiple files
 
@@ -15,7 +15,7 @@ Phrase search with exact sequential matching
 
 Trie-based autocomplete for prefixes
 
-🔹 How It Works
+ ## How It Works
 
 Load text files
 
@@ -28,23 +28,23 @@ Build global index:
 unordered_map<string, unordered_map<string, vector<int>>>
 
 
-Insert words into Trie
+### Insert words into Trie
 
 Provide search operations via menu
 
-🔹 Word Search
+ ### Word Search
 
 Directly fetch frequency from index and sort files by occurrences.
 
-🔹 Phrase Search
+### Phrase Search
 
 Check if phrase words appear sequentially using position matching.
 
-🔹 Autocomplete
+### Autocomplete
 
 Trie returns all words matching a given prefix.
 
-🔹 My Contribution (Stage 5)
+### My Contribution (Stage 5)
 
 Implemented graph bipartite check using BFS and color assignment
 to validate relationships across files.
