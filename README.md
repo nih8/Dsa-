@@ -44,10 +44,8 @@ Check if phrase words appear sequentially using position matching.
 
 Trie returns all words matching a given prefix.
 
-### My Contribution (Stage 5)
-
-Implemented graph bipartite check using BFS and color assignment
-to validate relationships across files.
+ A simple BFS-based bipartite check is included to validate graph-like relationships dynamically built during processing.
+This ensures stable linking of words/files and prevents invalid structural patterns.
 
 🔹 How to Run
 g++ main.cpp -o search
