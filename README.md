@@ -1,16 +1,54 @@
-# MINI SEARCH ENGINE
+🧭 Mini Search Engine (C++)
 
-## **Project Overview**
-- This project is focused on creating a mini search engine. 
-- It utilizes data structures and methodologies that are a simplified version of what major search engines like Google or Bing use.
-- We want to create a search engine for text files(like our own "Google" for documents).
-- To commit this , we have created a folder with text files and have added samples.txt files .
+This project implements a mini text-search engine using core C++ data structures.
+It supports Word Search, Phrase Search, and Autocomplete across multiple .txt files.
 
-## **What to Learn**
-We will Understand the methods in C++ and how we have applied all the relevant topics from c++ in our code to make our "Mini Search Engine" of five Text Files and how it searches through the hundreds of search elements for every "search" we make and gives our result.
+🔹 Features
+
+Indexes all words from multiple files
+
+Stores word positions for fast lookup
+
+Word search sorted by highest frequency
+
+Phrase search with exact sequential matching
+
+Trie-based autocomplete for prefixes
+
+🔹 How It Works
+
+Load text files
+
+Normalize: lowercase + remove punctuation
+
+Skip stopwords
+
+Build global index:
+
+unordered_map<string, unordered_map<string, vector<int>>>
 
 
-## **Core Concepts Implemented**:
-- Object-oriented programming: Implemented classes and structs to encapsulate data and functionality.
-- Data structures: Utilized unordered maps, tries, and heaps for efficient data storage and retrieval.
-- Project organization: Maintained a well-structured project layout for improved maintainability.
+Insert words into Trie
+
+Provide search operations via menu
+
+🔹 Word Search
+
+Directly fetch frequency from index and sort files by occurrences.
+
+🔹 Phrase Search
+
+Check if phrase words appear sequentially using position matching.
+
+🔹 Autocomplete
+
+Trie returns all words matching a given prefix.
+
+🔹 My Contribution (Stage 5)
+
+Implemented graph bipartite check using BFS and color assignment
+to validate relationships across files.
+
+🔹 How to Run
+g++ main.cpp -o search
+./search
